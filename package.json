@@ -1,0 +1,31 @@
+{
+  "name": "meetclone",
+  "version": "1.0.0",
+  "description": "A clone of Google Meet",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asrma7/MeetClone.git"
+  },
+  "author": "Ashutosh Sharma",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/asrma7/MeetClone/issues"
+  },
+  "homepage": "https://github.com/asrma7/MeetClone#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.1",
+    "moment": "^2.29.1",
+    "socket.io": "^4.2.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}

@@ -1,0 +1,189 @@
+<%- contentFor('style') %>
+    <style>
+        body {
+            background-color: #1F2023;
+            color: #FFFFFF;
+            margin-top: .5em;
+            margin-bottom: 5em;
+        }
+
+        .btn.btn-round:hover {
+            background-color: #444649;
+        }
+
+        .btn.btn-round:focus {
+            background-color: #515457;
+        }
+
+        .action-buttons .btn-round {
+            background-color: #3D4043;
+            margin: 0 .2em;
+        }
+
+        .action-buttons .btn-round.off {
+            background-color: #ea4335;
+        }
+
+        .btn.btn-round.off:hover {
+            background-color: #D95746;
+        }
+
+        .btn.btn-round.off:focus {
+            background-color: #DA6354;
+        }
+
+        .action-buttons .btn-round.on {
+            background-color: #8ab4f8;
+        }
+
+        .btn.btn-round.on:hover {
+            background-color: #95B6F2;
+        }
+
+        .btn.btn-round.on:focus {
+            background-color: #9BB9F1;
+        }
+
+        .list-buttons .btn.btn-round.active .icon {
+            color: #8ab4f8;
+        }
+    </style>
+
+    <%- contentFor('body') %>
+        <div class="visible-screen">
+            <div class="gallery" id="gallery">
+                <div class="user-container" id="user-container">
+                    <div class="user-box"></div>
+                    <div class="user-box"></div>
+                    <div class="user-box"></div>
+                    <div class="user-box"></div>
+                    <div class="user-box"></div>
+                    <div class="user-box"></div>
+                    <div class="user-box"></div>
+                    <div class="user-box"></div>
+                    <div class="user-box"></div>
+                    <div class="user-box"></div>
+                    <div class="user-box"></div>
+                    <div class="user-box"></div>
+                    <div class="user-box"></div>
+                </div>
+            </div>
+            <div id="sidebar">
+                <div class="content">
+                    <button class="btn btn-close" id="close-sidebar" onclick="closeSidebar()"><span
+                            class="google-material-icons">close</span></button>
+                    <div id="meeting-info">
+                        <span class="title">Meeting details</span>
+                        <span class="subtitle">Joining info</span>
+                        <div class="url">http://localhost:3000/<%= roomId %>
+                        </div>
+                        <button class="btn btn-submit" onclick="copyJoinInfo(this)"><span
+                                class="google-material-icons">copy</span> Copy joining
+                            info</button>
+                        <div class="divider divider-m"></div>
+                        <span class="extra">Google Calendar attachments show up here</span>
+                    </div>
+                    <div id="participants">
+                        <span class="title">People</span>
+                        <span class="subtitle">In call</span>
+                        <div class="participants-list">
+                            <div class="participant">
+                                <div class="avatar">
+                                    <img src="https://avatars.dicebear.com/api/bottts/asrma7.svg?b=%23c0a5a5&r=50"
+                                        alt="avatar">
+                                </div>
+                                <div class="username">asrma7</div>
+                            </div>
+                            <div class="participant">
+                                <div class="avatar">
+                                    <img src="https://avatars.dicebear.com/api/bottts/ankit.svg?b=%23c0a5a5&r=50"
+                                        alt="avatar">
+                                </div>
+                                <div class="username">ankit</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="chat">
+                        <span class="title">In-call messages</span>
+                        <span class="message-head">Messages can only be seen by people in the call and are deleted when
+                            the
+                            call ends.</span>
+                        <div class="chat-messages">
+                            <div class="message">
+                                <div class="meta">
+                                    <div class="user">You</div>
+                                    <div class="time">5:37 PM</div>
+                                </div>
+                                <p class="text">Hello there this is test message</p>
+                            </div>
+                            <div class="message">
+                                <div class="meta">
+                                    <div class="user">asrma</div>
+                                    <div class="time">5:37 PM</div>
+                                </div>
+                                <p class="text">Hello there this is test message</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="roomcode">
+                <%= roomId %>
+            </div>
+            <div class="present-menu" id="present-menu">
+                <ul class="present-options">
+                    <span class="heading">Present</span>
+                    <li onclick="togglePresentScreen('computer')">
+                        <span class="google-material-icons">computer</span>
+                        <div class="text">Your entire screen</div>
+                    </li>
+                    <li onclick="togglePresentScreen('window')">
+                        <span class="google-material-icons">web_asset</span>
+                        <div class="text">A window</div>
+                    </li>
+                    <li onclick="togglePresentScreen('tab')">
+                        <span class="google-material-icons">tab</span>
+                        <div class="text">A tab <span class="desc">Best for video and animation</span></div>
+                    </li>
+                </ul>
+                <ul class="stop-options">
+                    <li onclick="togglePresentScreen('')">
+                        <span class="google-material-icons">cancel_presentation</span>
+                        <div class="text">Stop presenting</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-round" onclick="toggleMute(this)"><span
+                        class="google-material-icons">mic</span></button>
+                <button class="btn btn-round off" onclick="toggleVideoCam(this)"><span
+                        class="google-material-icons">videocam_off</span></button>
+                <button class="btn btn-round" id="present-btn" onclick="togglePresentMenu(this)"><span
+                        class="google-material-icons">present_to_all</span></button>
+                <button class="btn btn-round" onclick="toggleFullScreen(this)" id="fullscreen"><span
+                        class="google-material-icons">fullscreen</span></button>
+                <button class="btn btn-round off" onclick="endCall(this)"><span
+                        class="google-material-icons">call_end</span></button>
+            </div>
+            <div class="list-buttons">
+                <button class="btn btn-round" onclick="showInfo(this)"><span
+                        class="icon google-material-icons">info</span></button>
+                <button class="btn btn-round participants" onclick="showParticipants(this)"><span
+                        class="icon google-material-icons">people</span><span class="count">55</span></button>
+                <button class="btn btn-round" onclick="showChat(this)"><span
+                        class="icon google-material-icons">chat</span></button>
+                <button class="btn btn-round"><span class="icon google-material-icons">feedback</span></button>
+                <button class="btn btn-round" onclick="showSettings(this)"><span
+                        class="icon google-material-icons">settings</span></button>
+            </div>
+        </div>
+
+
+        <%- contentFor('script') %>
+            <script>
+                const RoomID = "<%= roomId %>"
+            </script>
+            <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js'></script>
+            <script src="js/room.js"></script>
