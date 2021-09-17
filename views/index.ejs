@@ -1,0 +1,179 @@
+<header>
+    <nav>
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+            <a href="/">Geet</a>
+        </div>
+        <div class="right">
+            <div class="time">
+                <div class="clock">
+                    5:15 PM
+                </div>
+                <span> • </span>
+                <div class="date">
+                    Thu, Sep 16
+                </div>
+            </div>
+            <div class="nav-options">
+                <button class="btn btn-round">
+                    <span class="google-material-icons">
+                        help_outline
+                    </span>
+                </button>
+                <button class="btn btn-round">
+                    <span class="google-material-icons">
+                        feedback
+                    </span>
+                </button>
+                <button class="btn btn-round" onclick="showSettings(this)">
+                    <span class="google-material-icons">
+                        settings
+                    </span>
+                </button>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <div class="home">
+        <div class="info">
+            <h1>Premium video meetings. Now free for everyone.</h1>
+            <p>We re-engineered the service we built for secure business meetings, Moogle Geet, to make it free and
+                available for all.</p>
+            <div class="actions">
+                <button class="btn btn-primary" onclick="newMeeting()">
+                    <span class="google-material-icons">
+                        video_call
+                    </span> New
+                    Meeting</button>
+                <form action="/" id="meet-code">
+                    <div class="form-group">
+                        <label for="code">
+                            <span class="google-material-icons">
+                                keyboard
+                            </span>
+                        </label>
+                        <input type="text" name="code" id="code" placeholder="Enter a code or link" autocomplete="off">
+                    </div>
+                    <input type="submit" class="btn btn-submit" value="Join">
+                </form>
+            </div>
+            <div class="divider divider-l"></div>
+            <a href="">Learn more</a> about Moogle Geet
+        </div>
+        <div class="slide" id="slide">
+            <div class="image-preview">
+                <button id="previous" onclick="previous(this)" disabled>
+                    <span class="google-material-icons">
+                        navigate_before
+                    </span>
+                </button>
+                <button id="next" onclick="next(this)">
+                    <span class="google-material-icons">
+                        navigate_next
+                    </span>
+                </button>
+                <div class="slide-image">
+                    <img src="images/home_image1.svg" alt="Slide 1">
+                </div>
+            </div>
+            <div class="title">Get a link you can share</div>
+            <div class="description">
+                Click <b>New meeting</b> to get a link you can send to people you want to meet with
+            </div>
+            <div class="indicator">
+                <% for (var i=1; i <=4; i++ ) { %>
+                    <div class="circle <%= i === 1 && 'active' %>"></div>
+                    <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- contentFor('script') %>
+    <script>
+        const slideData = [
+            {
+                title: 'Get a link you can share',
+                description: 'Click <b>New meeting</b> to get a link you can send to people you want to meet with'
+            },
+            {
+                title: 'See everyone together',
+                description: 'To see more people at the same time, go to Change layout in the More options menu'
+            },
+            {
+                title: 'Plan ahead',
+                description: 'Click <b>New meeting</b> to schedule meetings in Google Calendar and send invites to participants'
+            },
+            {
+                title: 'Your meeting is safe',
+                description: 'No one can join a meeting unless invited or admitted by the host'
+            },
+        ]
+        let slideCount = 0
+        const slide = document.getElementById('slide')
+        const codeForm = document.getElementById('meet-code')
+        const slideImage = slide.querySelector('.slide-image img')
+        const slideTitle = slide.querySelector('.title')
+        const slideDescription = slide.querySelector('.description')
+        const indicators = slide.querySelector('.indicator')
+        codeForm.addEventListener('submit', function (e) {
+            e.preventDefault()
+            code = urlTrim(e.target.elements.code.value)
+            if (isValidUUID(code)) {
+                window.location.href = `http://localhost:3000/${code}`
+            }
+            else {
+                alert('invalid')
+            }
+            e.target.elements[1].blur()
+        })
+
+        function newMeeting() {
+            window.location.href = 'http://localhost:3000/newroom'
+        }
+
+        function urlTrim(code) {
+            code = code.replace('http://localhost:3000/', '')
+            console.log(code)
+            return code;
+        }
+
+        function isValidUUID(uuid) {
+            let s = "" + uuid;
+            s = s.match(/^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
+            if (s === null) {
+                return false;
+            }
+            return true;
+        }
+
+        function previous(elm) {
+            if (slideCount > 0)
+                slideCount--;
+            elm.blur()
+            if (slideCount == 0)
+                elm.disabled = true
+            if (slideCount < 3)
+                slide.querySelector('#next').disabled = false
+            changeSlide(slideCount)
+        }
+        function next(elm) {
+            if (slideCount < 3)
+                slideCount++;
+            elm.blur()
+            if (slideCount == 3)
+                elm.disabled = true
+            if (slideCount > 0)
+                slide.querySelector('#previous').disabled = false
+            changeSlide(slideCount)
+        }
+
+        function changeSlide(index) {
+            slideTitle.innerHTML = slideData[index].title
+            slideDescription.innerHTML = slideData[index].description
+            slideImage.src = `images/home_image${index + 1}.svg`
+            indicators.querySelector('.active').classList.remove('active')
+            indicators.children[index].classList.add('active')
+        }
+    </script>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>
+    <%= !(typeof title==='undefined' ) ? title : 'Moogle Geet' %>
+  </title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="images/web_24dp.png" sizes="24x24">
+  <link rel="shortcut icon" href="images/web_32dp.png" sizes="32x32">
+  <%- defineContent('style') %>
+</head>
+
+<body>
+  <%- body %>
+    <div id="settingsModal" class="modal">
+      <div class="modal-content">
+        <button class="btn btn-close" id="modalclose">
+          <span class="google-material-icons">close</span>
+        </button>
+        <div class="heading">Settings</div>
+        <div class="settings-panel">
+          <div class="menu">
+            <ul class="settings-menu">
+              <li class="active" onclick="showAudio(this)"><span class="google-material-icons">speaker</span> Audio</li>
+              <li onclick="showVideo(this)"><span class="google-material-icons">videocam</span> Video</li>
+              <li onclick="showGeneral(this)"><span class="google-material-icons">settings</span> General</li>
+            </ul>
+          </div>
+          <div class="settings">
+            <div id="audio-settings">
+              <div class="settings-input">
+                <div class="title">Microphone</div>
+                <div class="input-dropdown">
+                  <select name="microphone" id="microphone-select" class="material-select">
+                    <option value="Default - MacBook Pro Microphone (Built-in)">Default - MacBook Pro Microphone
+                      (Built-in)</option>
+                    <option value="MacBook Pro Microphone (Built-in)">MacBook Pro Microphone (Built-in)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="settings-input">
+                <div class="title">Speakers</div>
+                <div class="input-dropdown">
+                  <select name="speakers" id="speakers-select" class="material-select">
+                    <option value="Default - MacBook Pro Speakers (Built-in)">Default - MacBook Pro Speakers (Built-in)
+                    </option>
+                    <option value="MacBook Pro Speakers (Built-in)">MacBook Pro Speakers (Built-in)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div id="video-settings">
+              <div class="settings-input">
+                <div class="title">Camera</div>
+                <div class="input-dropdown">
+                  <select name="camera" id="camera-select" class="material-select">
+                    <option value="FaceTime HD Camera (Built-in) (05ac:8514)">FaceTime HD Camera (Built-in) (05ac:8514)
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div id="general-settings">
+              <div class="settings-input">
+                <input type="checkbox" name="report" id="report" class="material-check">
+                <label for="report">Report additional diagnostics to help improve this product</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/main.js"></script>
+    <%- defineContent('script') %>
+</body>
+
+</html>
