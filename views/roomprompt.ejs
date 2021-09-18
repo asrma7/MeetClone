@@ -1,0 +1,114 @@
+<%- contentFor('style') %>
+    <style>
+        .bottom-actions .btn-round {
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+
+        .bottom-actions .btn.btn-round:hover,
+        .bottom-actions .btn.btn-round:focus {
+            background-color: #ffffff99;
+        }
+
+        .bottom-actions .btn-round.off {
+            background-color: #ea4335;
+            border: 2px solid #ea4335;
+        }
+
+        .bottom-actions .btn.btn-round.off:hover {
+            background-color: #D95746;
+        }
+
+        .bottom-actions .btn.btn-round.off:focus {
+            background-color: #DA6354;
+        }
+    </style>
+    <%- contentFor('body') %>
+        <header>
+            <nav>
+                <div class="logo">
+                    <img src="images/logo.png" alt="Logo">
+                    <a href="/">Geet</a>
+                </div>
+                <div class="right">
+                    <div class="time">
+                        <div class="clock">
+                            5:15 PM
+                        </div>
+                        <span> • </span>
+                        <div class="date">
+                            Thu, Sep 16
+                        </div>
+                    </div>
+                    <div class="nav-options">
+                        <button class="btn btn-round">
+                            <span class="google-material-icons">
+                                help_outline
+                            </span>
+                        </button>
+                        <button class="btn btn-round">
+                            <span class="google-material-icons">
+                                feedback
+                            </span>
+                        </button>
+                        <button class="btn btn-round" onclick="showSettings(this)">
+                            <span class="google-material-icons">
+                                settings
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <div class="roomprompt">
+                <div class="video">
+                    <video src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4" autoplay muted loop></video>
+                    <div class="bottom-actions">
+                        <div class="btn-group">
+                            <button class="btn btn-round" onclick="toggleMute(this)"><span
+                                    class="google-material-icons">mic</span></button>
+                            <button class="btn btn-round" onclick="toggleVideoCam(this)"><span
+                                    class="google-material-icons">videocam</span></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="prompt">
+                    <div class="title">Ready to Join?</div>
+                    <div class="participants-count">No one else is here</div>
+                    <div class="btn-group">
+                        <button class="btn btn-primary btn-rounded btn-shadowed" onclick="joinRoom(this)">Join
+                            now</button>
+                        <button class="btn btn-submit btn-rounded btn-shadowed" onclick="joinRoom(this)">
+                            <span class="google-material-icons">present_to_all</span>
+                            Present
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%- contentFor('script') %>
+            <script>
+                const RoomID = '<%= roomId %>';
+                let isMute = false;
+                let isCamOff = false;
+                function toggleMute(elm) {
+                    elm.classList.toggle('off');
+                    elm.querySelector('span').innerText = elm.querySelector('span').innerText === 'mic_off' ? 'mic' : 'mic_off';
+                    isMute = !isMute;
+                    elm.blur();
+                }
+
+                function toggleVideoCam(elm) {
+                    elm.classList.toggle('off');
+                    elm.querySelector('span').innerText = elm.querySelector('span').innerText === 'videocam_off' ? 'videocam' : 'videocam_off';
+                    isCamOff = !isCamOff;
+                    elm.blur();
+                }
+
+                function joinRoom(elm) {
+                    elm.blur();
+                    window.location.replace(`http://localhost:3000/join/${RoomID}?isMute=${isMute}&isCamOff=${isCamOff}`);
+                }
+            </script>

@@ -58,6 +58,15 @@ body {
     outline: none;
 }
 
+.btn-group {
+    display: flex;
+    align-items: center;
+}
+
+.btn-group .btn {
+    margin: 0 1em;
+}
+
 .btn {
     border: none;
     height: 45px;
@@ -67,6 +76,10 @@ body {
     background-color: transparent;
     cursor: pointer;
     color: inherit;
+}
+
+.btn>span {
+    vertical-align: middle;
 }
 
 .btn.btn-primary {
@@ -99,9 +112,17 @@ body {
     background-color: #E8EEFB;
 }
 
+.btn.btn-shadowed {
+    box-shadow: 0px 1px 2px 0px rgba(60, 64, 67, .30), 0px 1px 3px 1px rgba(60, 64, 67, .15);
+}
+
 .btn.btn-round {
     border-radius: 50%;
     padding: 10px;
+}
+
+.btn.btn-rounded {
+    border-radius: 50px;
 }
 
 .btn.btn-round:hover {
@@ -145,6 +166,7 @@ body {
 }
 
 nav {
+    z-index: 2;
     padding: 1em 8px;
     font-size: 1.2em;
     display: flex;
@@ -233,11 +255,6 @@ nav .right {
 
 .info .actions {
     display: flex;
-}
-
-.actions .btn span {
-    vertical-align: middle;
-    font-size: 1.2rem;
 }
 
 .info form {
@@ -623,6 +640,8 @@ video {
     margin: 0;
 }
 
+/* Modal code */
+
 .modal {
     display: none;
     position: fixed;
@@ -720,7 +739,7 @@ ul.settings-menu {
 
 .settings .title {
     letter-spacing: .01785714em;
-    font-family: Roboto,Arial,sans-serif;
+    font-family: Roboto, Arial, sans-serif;
     font-size: .875rem;
     font-weight: 500;
     line-height: 1.25rem;
@@ -742,4 +761,51 @@ ul.settings-menu {
     height: 22px;
     width: 22px;
     vertical-align: middle;
+}
+
+/* Room Join Code */
+
+.roomprompt {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 2em;
+}
+
+.video {
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    width: 60%;
+}
+
+.video video {
+    transform: scaleX(-1);
+    pointer-events: none;
+    height: 100%;
+    margin-bottom: -3px;
+}
+
+.prompt {
+    text-align: center;
+}
+
+.prompt .title {
+    font-size: 1.5em;
+}
+
+.prompt .participants-count {
+    margin: 1em 0;
+    font-size: .9em;
+}
+
+.bottom-actions {
+    background-color: #00000066;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
 }

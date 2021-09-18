@@ -21,11 +21,15 @@ app.get('/', (req, res) => {
 })
 
 app.get('/newroom', (req, res) => {
-    res.redirect(`/${uuidV4()}`)
+    res.redirect(`/join/${uuidV4()}`)
+})
+
+app.get('/join/:room', (req, res) => {
+    res.render('room.ejs', { roomId: req.params.room, isMute: req.query.isMute === 'true', isCamOff: req.query.isCamOff=== 'true' })
 })
 
 app.get('/:room', (req, res) => {
-    res.render('room', { roomId: req.params.room })
+    res.render('roomprompt.ejs', { roomId: req.params.room })
 })
 
 const PORT = process.env.PORT || 3000

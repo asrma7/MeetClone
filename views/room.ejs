@@ -156,10 +156,10 @@
                 </ul>
             </div>
             <div class="action-buttons">
-                <button class="btn btn-round" onclick="toggleMute(this)"><span
-                        class="google-material-icons">mic</span></button>
-                <button class="btn btn-round off" onclick="toggleVideoCam(this)"><span
-                        class="google-material-icons">videocam_off</span></button>
+                <button class="btn btn-round<%=isMute ? ' off' : '' %>" onclick="toggleMute(this)"><span
+                        class="google-material-icons">mic<%=isMute ? '_off' : '' %></span></button>
+                <button class="btn btn-round<%=isCamOff ? ' off' : '' %>" onclick="toggleVideoCam(this)"><span
+                        class="google-material-icons">videocam<%=isCamOff ? '_off' : '' %></span></button>
                 <button class="btn btn-round" id="present-btn" onclick="togglePresentMenu(this)"><span
                         class="google-material-icons">present_to_all</span></button>
                 <button class="btn btn-round" onclick="toggleFullScreen(this)" id="fullscreen"><span
@@ -184,6 +184,8 @@
         <%- contentFor('script') %>
             <script>
                 const RoomID = "<%= roomId %>"
+                let isMute = "<%= isMute %>"
+                const isCamOff = "<%= isCamOff %>"
             </script>
             <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js'></script>
-            <script src="js/room.js"></script>
+            <script src="/js/room.js"></script>
